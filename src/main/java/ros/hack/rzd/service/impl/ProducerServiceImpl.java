@@ -1,11 +1,11 @@
-package ros.hack.bonuses.service.impl;
+package ros.hack.rzd.service.impl;
 
 import com.github.voteva.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
-import ros.hack.bonuses.service.ProducerService;
+import ros.hack.rzd.service.ProducerService;
 
 @Slf4j
 @RequiredArgsConstructor

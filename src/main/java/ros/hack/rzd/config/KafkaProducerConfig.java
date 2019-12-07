@@ -1,4 +1,4 @@
-package ros.hack.bonuses.config;
+package ros.hack.rzd.config;
 
 import com.github.voteva.Operation;
 import org.apache.kafka.clients.producer.ProducerConfig;

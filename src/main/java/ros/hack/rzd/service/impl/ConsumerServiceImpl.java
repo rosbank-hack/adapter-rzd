@@ -1,4 +1,4 @@
-package ros.hack.bonuses.service.impl;
+package ros.hack.rzd.service.impl;
 
 import com.github.voteva.Operation;
 import lombok.NonNull;
@@ -8,14 +8,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ros.hack.bonuses.service.ConsumerService;
-import ros.hack.bonuses.service.ProducerService;
+import ros.hack.rzd.service.ConsumerService;
+import ros.hack.rzd.service.ProducerService;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static ros.hack.bonuses.consts.BonusConsts.SERVICE_NAME;
+import static ros.hack.rzd.consts.BonusConsts.SERVICE_NAME;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -43,7 +43,7 @@ public class ConsumerServiceImpl<K, V> implements ConsumerService<K, V> {
                 .getServices()
                 .get(SERVICE_NAME)
                 .getRequest();
-        response.put("amount", String.valueOf(Math.random()));
+        response.put("rzdBonusAmount", String.valueOf(Math.random()));
 
         com.github.voteva.Service bonusService = com.github.voteva.Service.builder()
                 .request(operation
