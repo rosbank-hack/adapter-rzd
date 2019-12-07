@@ -1,4 +1,4 @@
-package ros.hack.api.config;
+package ros.hack.bonuses.config;
 
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

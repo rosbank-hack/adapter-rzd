@@ -16,11 +16,11 @@ targetCompatibility = 1.11
 
 repositories {
     mavenCentral()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
 }
 
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-web"
-    compile "org.springframework.boot:spring-boot-starter-data-jpa"
     //compile "org.springframework.data:spring-data-redis"
     compile "org.springframework.boot:spring-boot-starter-thymeleaf"
     compile "org.springframework.boot:spring-boot-starter-actuator"
@@ -28,16 +28,11 @@ dependencies {
     //compile "org.springframework.boot:spring-boot-starter-security"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
-    compile "redis.clients:jedis"
-    compile "org.postgresql:postgresql"
+    implementation 'org.springframework.kafka:spring-kafka'
 
     compile "com.google.code.gson:gson:${gsonVersion}"
     compile "com.google.guava:guava:${guavaVersion}"
     compile "org.apache.commons:commons-lang3:${commonsLangVersion}"
-
-    compile "io.swagger:swagger-annotations:${swaggerVersion}"
-    compile "io.springfox:springfox-swagger-ui:${swaggerSpringVersion}"
-    compile "io.springfox:springfox-swagger2:${swaggerSpringVersion}"
 
     compileOnly "com.google.code.findbugs:jsr305:${findBugsVersion}"
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
@@ -46,6 +41,8 @@ dependencies {
     testCompile "org.springframework.boot:spring-boot-starter-test"
     testCompile "org.projectlombok:lombok"
     testAnnotationProcessor "org.projectlombok:lombok"
+
+    compile "com.github.voteva:operation-history-model:1.0.0-SNAPSHOT"
 }
 
 idea {

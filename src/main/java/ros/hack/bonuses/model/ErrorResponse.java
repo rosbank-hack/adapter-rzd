@@ -1,4 +1,4 @@
-package ros.hack.api.model;
+package ros.hack.bonuses.model;
 
 import lombok.Data;
 
