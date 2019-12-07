@@ -33,11 +33,11 @@ public class ConsumerServiceImpl<K, V> implements ConsumerService<K, V> {
     public void consume(@NonNull List<Operation> operations) {
         operations.forEach(operation -> {
             log.info(operation.toString());
-            producerService.send(topic, addCashback(operation));
+            producerService.send(topic, addBonuses(operation));
         });
     }
 
-    private Operation addCashback(@NonNull Operation operation) {
+    private Operation addBonuses(@NonNull Operation operation) {
         Map<String, com.github.voteva.Service> services = new HashMap<>();
         Map<String, String> response = operation
                 .getServices()
