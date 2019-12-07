@@ -15,7 +15,7 @@ services:
       KAFKA_DELETE_TOPIC_ENABLE: "true"
       KAFKA_LISTENERS: PLAINTEXT://:9092
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
-      KAFKA_CREATE_TOPICS: "bonus-transaction:1:1, bonus-notbank:1:1"
+      KAFKA_CREATE_TOPICS: "payment-bonus:1:1, operations:1:1"
     depends_on:
       - "zookeeper"
 
