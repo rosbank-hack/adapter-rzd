@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import static ros.hack.rzd.consts.Constants.DESCRIPTION;
 import static ros.hack.rzd.consts.Constants.SERVICE_NAME;
 
 @Slf4j
@@ -37,24 +38,24 @@ public class ConsumerServiceImpl implements ConsumerService {
     }
 
     private Operation addBonuses(@NonNull Operation operation) {
-        com.github.voteva.Service providerService = new com.github.voteva.Service();
+        com.github.voteva.Service rzd = new com.github.voteva.Service();
         if (operation.getServices() != null
                 && operation.getServices().get(SERVICE_NAME) != null) {
-            providerService = operation.getServices().get(SERVICE_NAME);
+            rzd = operation.getServices().get(SERVICE_NAME);
         }
 
         Map<String, String> request = new HashMap<>();
-        if (providerService.getRequest() != null) {
-            request = providerService.getRequest();
+        if (rzd.getRequest() != null) {
+            request = rzd.getRequest();
         }
         Map<String, String> response = request;
 
-        response.put("description", "С картой РЖД-Росбанк вы могли получить " + getRandomBonus() + "бонусов.");
+        response.put(DESCRIPTION, "С картой РЖД-Росбанк вы могли получить " + getRandomBonus() + "бонусов.");
 
-        providerService.setRequest(request);
-        providerService.setResponse(response);
+        rzd.setRequest(request);
+        rzd.setResponse(response);
 
-        operation.getServices().put(SERVICE_NAME, providerService);
+        operation.getServices().put(SERVICE_NAME, rzd);
         return operation;
     }
 
