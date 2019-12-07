@@ -14,13 +14,14 @@ import ros.hack.rzd.service.ProducerService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import static ros.hack.rzd.consts.Constants.SERVICE_NAME;
 
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class ConsumerServiceImpl<K, V> implements ConsumerService<K, V> {
+public class ConsumerServiceImpl implements ConsumerService {
 
     private final KafkaProperties kafkaProperties;
     private final ProducerService producerService;
@@ -48,12 +49,17 @@ public class ConsumerServiceImpl<K, V> implements ConsumerService<K, V> {
         }
         Map<String, String> response = request;
 
-        response.put("rzdBonusAmount", String.valueOf(Math.random()));
+        response.put("description", "С картой РЖД-Росбанк вы могли получить " + getRandomBonus() + "бонусов.");
 
         providerService.setRequest(request);
         providerService.setResponse(response);
 
         operation.getServices().put(SERVICE_NAME, providerService);
         return operation;
+    }
+
+    private Integer getRandomBonus() {
+        Random random = new Random();
+        return random.nextInt(151) + 50;
     }
 }
