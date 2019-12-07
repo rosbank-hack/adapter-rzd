@@ -1,7 +1,6 @@
 package ros.hack.bonuses.service.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.voteva.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -16,7 +15,6 @@ import ros.hack.bonuses.service.ProducerService;
 public class ProducerServiceImpl implements ProducerService {
 
     private final KafkaTemplate<String, Operation> kafkaTemplate;
-    private final ObjectMapper objectMapper;
 
     @Override
     @SneakyThrows(JsonProcessingException.class)
