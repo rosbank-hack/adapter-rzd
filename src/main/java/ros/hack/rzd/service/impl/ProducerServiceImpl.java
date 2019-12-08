@@ -12,9 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 import ros.hack.rzd.service.ProducerService;
 
 @Slf4j
-@RequiredArgsConstructor
 @Service
-public class ProducerServiceImpl implements ProducerService {
+@RequiredArgsConstructor
+public class ProducerServiceImpl
+        implements ProducerService {
 
     private final KafkaTemplate<String, String> kafkaTemplate;
     private final ObjectMapper objectMapper;

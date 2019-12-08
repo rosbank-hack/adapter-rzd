@@ -2,6 +2,8 @@ package ros.hack.rzd.service;
 
 import com.github.voteva.Operation;
 
+import javax.annotation.Nonnull;
+
 public interface ProducerService {
-    void send(String topic, Operation operation);
+    void send(@Nonnull String topic, @Nonnull Operation operation);
 }

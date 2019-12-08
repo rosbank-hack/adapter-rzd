@@ -1,28 +1,29 @@
 package ros.hack.rzd.service.impl;
 
 import com.github.voteva.Operation;
-import lombok.NonNull;
+import com.github.voteva.Service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ros.hack.rzd.config.KafkaProperties;
+import ros.hack.rzd.config.properties.KafkaProperties;
 import ros.hack.rzd.service.ConsumerService;
 import ros.hack.rzd.service.ProducerService;
 
-import java.util.HashMap;
+import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import static com.google.common.collect.Maps.newHashMap;
 import static ros.hack.rzd.consts.Constants.DESCRIPTION;
 import static ros.hack.rzd.consts.Constants.SERVICE_NAME;
 
 @Slf4j
 @RequiredArgsConstructor
-@Service
-public class ConsumerServiceImpl implements ConsumerService {
+@org.springframework.stereotype.Service
+public class ConsumerServiceImpl
+        implements ConsumerService {
 
     private final KafkaProperties kafkaProperties;
     private final ProducerService producerService;
@@ -30,21 +31,21 @@ public class ConsumerServiceImpl implements ConsumerService {
     @Override
     @Transactional
     @KafkaListener(topics = "${kafka.payment-topic}", containerFactory = "kafkaListenerContainerFactory")
-    public void consume(@NonNull List<Operation> operations) {
+    public void consume(@Nonnull List<Operation> operations) {
         operations.forEach(operation -> {
             log.info(operation.toString());
             producerService.send(kafkaProperties.getOperationTopic(), addBonuses(operation));
         });
     }
 
-    private Operation addBonuses(@NonNull Operation operation) {
-        com.github.voteva.Service rzd = new com.github.voteva.Service();
-        if (operation.getServices() != null
-                && operation.getServices().get(SERVICE_NAME) != null) {
+    @Nonnull
+    private Operation addBonuses(@Nonnull Operation operation) {
+        Service rzd = new Service();
+        if (operation.getServices() != null && operation.getServices().get(SERVICE_NAME) != null) {
             rzd = operation.getServices().get(SERVICE_NAME);
         }
 
-        Map<String, String> request = new HashMap<>();
+        Map<String, String> request = newHashMap();
         if (rzd.getRequest() != null) {
             request = rzd.getRequest();
         }
@@ -59,6 +60,7 @@ public class ConsumerServiceImpl implements ConsumerService {
         return operation;
     }
 
+    @Nonnull
     private Integer getRandomBonus() {
         Random random = new Random();
         return random.nextInt(151) + 50;

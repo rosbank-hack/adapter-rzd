@@ -11,6 +11,7 @@ import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.support.converter.BatchMessagingMessageConverter;
 import org.springframework.kafka.support.converter.StringJsonMessageConverter;
+import ros.hack.rzd.config.properties.KafkaProperties;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +22,6 @@ import java.util.Map;
 public class KafkaConsumerConfiguration {
 
     private final KafkaProperties properties;
-
 
     private ConsumerFactory<String, String> consumerFactory() {
         Map<String, Object> props = new HashMap<>();
@@ -35,9 +35,9 @@ public class KafkaConsumerConfiguration {
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setMessageConverter(new BatchMessagingMessageConverter(new StringJsonMessageConverter()));
         factory.setConsumerFactory(consumerFactory());
         factory.setBatchListener(true);
-        factory.setMessageConverter(new BatchMessagingMessageConverter(new StringJsonMessageConverter()));
         return factory;
     }
 }
